@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "outfinity-gift.fullname" . }}
+  namespace: {{ template "outfinity-gift.namespace" . }}
+  labels:
+    {{- include "outfinity-gift.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "outfinity-gift.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmaps.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
+      {{- with .Values.outfinityGift.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "outfinity-gift.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "outfinity-gift.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.outfinityGift.podSecurityContext | nindent 8 }}
+      containers:
+        - name: outfinity-gift
+          securityContext:
+            {{- toYaml .Values.outfinityGift.securityContext | nindent 12 }}
+          image: "{{ .Values.outfinityGift.image.repository }}:{{ .Values.outfinityGift.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.outfinityGift.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.outfinityGift.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.outfinityGift.readinessProbe | nindent 12 }}
+          volumeMounts:
+            - name: outfinity-gift-external-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume
+            - name: outfinity-gift-secret-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume/config/apihub.json
+              subPath: apihub.json
+              readOnly: true
+            - name: outfinity-gift-bdns-config-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume/config/bdns.hosts
+              subPath: bdns.hosts
+              readOnly: true
+            - name: outfinity-gift-secret-volume
+              mountPath: /outfinity-gift/env.json
+              subPath: env.json
+              readOnly: true
+            - name: outfinity-gift-domains-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume/config/domains/{{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
+              subPath: {{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
+              readOnly: true
+      volumes:
+        - name: outfinity-gift-secret-volume
+          secret:
+            secretName: {{ include "outfinity-gift.fullname" . }}
+            defaultMode: 0400
+        - name: outfinity-gift-bdns-config-volume
+          configMap:
+            name: {{ include "outfinity-gift.fullname" . }}-bdns
+        - name: outfinity-gift-domains-volume
+          configMap:
+            name: {{ include "outfinity-gift.fullname" . }}-domains
+        - name: outfinity-gift-env-volume
+          configMap:
+            name: {{ include "outfinity-gift.fullname" . }}-environment
+        - name: outfinity-gift-external-volume
+          persistentVolumeClaim:
+            claimName: {{ include "outfinity-gift.pvc" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

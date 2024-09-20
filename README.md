@@ -1,1 +1,1 @@
-# outfnity-gift-helm-charts
+# outfinity-gift-helm-charts
