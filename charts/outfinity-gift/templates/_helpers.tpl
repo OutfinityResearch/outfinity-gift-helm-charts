@@ -108,19 +108,19 @@ Configuration apihub.json.
     "bdns",
     "bricking",
     "anchoring",
-    "time-gift-api",
+    "outfinity-gift-api",
     "versionlessDSU",
     "secrets",
     "lightDBEnclave",
     "staticServer"
   ],
   "componentsConfig": {
-    "time-gift-api": {
-      "module": "./../../time-gift-apis",
+    "outfinity-gift-api": {
+      "module": "./../../outfinity-gift-apis",
       "function": "getAPIs"
     },
-    "time-gift-constants": {
-      "module": "./../../time-gift-apis",
+    "outfinity-gift-constants": {
+      "module": "./../../outfinity-gift-apis",
       "function": "getConstants"
     },
     "versionlessDSU": {
