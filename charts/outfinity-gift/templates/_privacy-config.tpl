@@ -2,11 +2,19 @@
 Template for privacy.txt ConfigMap.
 */}}
 {{- define "outfinity-gift.configmap-privacy" -}}
+{{- $ := index . 0 }}
+{{- $suffix := index . 2 }}
+{{- $annotations := index . 3 }}
+  {{- with index . 1 }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: privacy-config
+  name: {{ include "outfinity-gift.fullname" . }}-bdns{{ $suffix | default "" }}
   namespace: {{ template "outfinity-gift.namespace" . }}
+  {{- with $annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "outfinity-gift.labels" . | nindent 4 }}
 data:
@@ -34,4 +42,5 @@ data:
 
     8. Contact Us
     If you have any questions or concerns about our Privacy Policy, please contact us.
+{{- end }}
 {{- end }}

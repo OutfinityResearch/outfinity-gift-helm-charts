@@ -60,6 +60,14 @@ spec:
               mountPath: /outfinity-gift/apihub-root/external-volume/config/domains/{{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
               subPath: {{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
               readOnly: true
+            - name: home-content-config-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume/templates/homeContent.json
+              subPath: homeContent.json
+              readOnly: true
+            - name: privacy-config-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume/templates/privacy.txt
+              subPath: privacy.txt
+              readOnly: true
       volumes:
         - name: outfinity-gift-secret-volume
           secret:
@@ -77,6 +85,12 @@ spec:
         - name: outfinity-gift-external-volume
           persistentVolumeClaim:
             claimName: {{ include "outfinity-gift.pvc" . }}
+        - name: home-content-config-volume
+          configMap:
+            name: {{ include "outfinity-gift.fullname" . }}-home-content
+        - name: privacy-config-volume
+          configMap:
+            name: {{ include "outfinity-gift.fullname" . }}-privacy
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
