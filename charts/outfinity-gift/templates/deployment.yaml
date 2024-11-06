@@ -27,14 +27,19 @@ spec:
       serviceAccountName: {{ include "outfinity-gift.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.outfinityGift.podSecurityContext | nindent 8 }}
-
       initContainers:
         - name: init-copy-data
           image: {{ .Values.outfinityGift.image.repository }}:{{ .Values.outfinityGift.image.tag }}
-          command: [ "sh", "-c", "mkdir -p /mnt/outfinity-gift-volume/templates && cp -r /outfinity-gift/apihub-root/external-volume/templates/* /mnt/outfinity-gift-volume/templates" ]
+          command:
+            - "sh"
+            - "-c"
+            - |
+              mkdir -p /mnt/outfinity-gift-volume/templates && \
+              cp /outfinity-gift/apihub-root/external-volume/templates/homeContent.json /mnt/outfinity-gift-volume/templates/ && \
+              cp /outfinity-gift/apihub-root/external-volume/templates/privacy.txt /mnt/outfinity-gift-volume/templates/
           volumeMounts:
             - name: outfinity-gift-external-volume
-              mountPath: /mnt/outfinity-gift-volume/templates
+              mountPath: /mnt/outfinity-gift-volume
 
       containers:
         - name: outfinity-gift
