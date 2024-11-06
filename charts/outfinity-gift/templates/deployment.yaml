@@ -31,7 +31,7 @@ spec:
       initContainers:
         - name: init-copy-data
           image: {{ .Values.outfinityGift.image.repository }}:{{ .Values.outfinityGift.image.tag }}
-          command: [ "sh", "-c", "cp -r /outfinity-gift/apihub-root/external-volume/templates/* /mnt/outfinity-gift-volume/templates" ]
+          command: [ "sh", "-c", "mkdir -p /mnt/outfinity-gift-volume/templates && cp -r /outfinity-gift/apihub-root/external-volume/templates/* /mnt/outfinity-gift-volume/templates" ]
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /mnt/outfinity-gift-volume/templates
