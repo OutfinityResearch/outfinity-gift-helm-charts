@@ -7,6 +7,7 @@ config:
   # -- The Vault domain, should be vault.company, e.g. vault.my-company
   vaultDomain: "vault.my-company"
   ssoSecretsEncryptionKey: "8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="
+  stripeSecretKey: ""
   # -- Enable Dev mode
   dev: "true"
   # -- The outfinity-gift version
