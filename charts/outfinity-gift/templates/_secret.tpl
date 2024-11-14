@@ -42,6 +42,6 @@ data:
 {{- end }}
 
   config.json: |
-{{ include "outfinity-gift.apihubJson" . | b64enc | indent 4 }}
+{{ include "outfinity-gift.s3AdapterConfigJson" . | b64enc | indent 4 }}
 {{- end }}
 {{- end }}
