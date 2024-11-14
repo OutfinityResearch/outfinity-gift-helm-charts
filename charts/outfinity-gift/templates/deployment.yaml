@@ -74,7 +74,7 @@ spec:
               mountPath: /outfinity-gift/apihub-root/external-volume/config/domains/{{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
               subPath: {{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
               readOnly: true
-        - name: s3Adapter
+        - name: s3-adapter
           image: "{{ .Values.s3Adapter.image.repository }}:{{ .Values.s3Adapter.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.s3Adapter.image.pullPolicy }}
           volumeMounts:
