@@ -19,6 +19,7 @@ spec:
       {{- end }}
       labels:
         {{- include "outfinity-gift.selectorLabels" . | nindent 8 }}
+        app: s3-adapter
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -77,6 +78,10 @@ spec:
         - name: s3-adapter
           image: "{{ .Values.s3Adapter.image.repository }}:{{ .Values.s3Adapter.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.s3Adapter.image.pullPolicy }}
+          ports:
+            - containerPort: {{ required "s3AdapterConfig.port must be set" .Values.s3AdapterConfig.port }}
+              name: http
+              protocol: TCP
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /outfinity-gift/apihub-root/external-volume

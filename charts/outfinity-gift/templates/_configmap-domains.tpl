@@ -34,7 +34,9 @@ data:
     {
       "anchoring": {
         "type": "FS"
-      }
+      },
+      "enableBackup": true,
+      "backupServerUrl": "http://s3-adapter:${{ required "s3AdapterConfig.port must be set" .Values.s3AdapterConfig.port }}/backup",
     }
 {{- end }}
 
