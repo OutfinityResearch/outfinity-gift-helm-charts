@@ -40,5 +40,8 @@ data:
 {{- else }}
 {{ include "outfinity-gift.apihubJson" . | b64enc | indent 4 }}
 {{- end }}
+
+  config.json: |
+{{ include "outfinity-gift.apihubJson" . | b64enc | indent 4 }}
 {{- end }}
 {{- end }}

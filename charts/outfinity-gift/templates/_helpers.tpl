@@ -146,3 +146,23 @@ Configuration apihub.json.
   "enableLocalhostAuthorization": false
 }
 {{- end }}
+
+{{- define "outfinity-gift.s3AdapterConfigJson" -}}
+{
+    "port": {{ required "s3AdapterConfig.port must be set" .Values.s3AdapterConfig.port }},
+    "s3": {
+        "endpoint": {{ required "s3AdapterConfig.endpoint must be set" .Values.s3AdapterConfig.endpoint | quote }},
+        "bucketName": {{ required "s3AdapterConfig.bucketName must be set" .Values.s3AdapterConfig.bucketName | quote }},
+        "region": {{ required "s3AdapterConfig.region must be set" .Values.s3AdapterConfig.region | quote }},
+        "accessKeyId": {{ required "s3AdapterConfig.accessKeyId must be set" .Values.s3AdapterConfig.accessKeyId | quote }},
+        "secretAccessKey": {{ required "s3AdapterConfig.secretAccessKey must be set" .Values.s3AdapterConfig.secretAccessKey | quote }}
+    },
+    "backupJournalFilePath": {{ required "s3AdapterConfig.backupJournalFilePath must be set" .Values.s3AdapterConfig.backupJournalFilePath | quote }},
+    "watchList": [
+        {{- range $index, $item := .Values.s3AdapterConfig.watchList }}
+        {{- if $index }}, {{ end }}{{ $item | quote }}
+        {{- end }}
+    ]
+}
+{{- end }}
+

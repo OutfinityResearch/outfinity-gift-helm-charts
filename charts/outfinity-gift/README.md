@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.0.11](https://img.shields.io/badge/Version-1.0.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -15,6 +15,8 @@ A Helm chart for Kubernetes
 | config.overrides.bdnsHosts | string | `""` | Centrally managed and provided BDNS Hosts Config. You must set this value in a non-sandbox environment! See [templates/_configmap-bdns.tpl](templates/_configmap-bdns.tpl) for default value. |
 | config.overrides.envJson | string | `""` | Option to explitly override the env.json for APIHub instead of using the predefined template. Note 1: Usually not required to override. Note 2: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. |
 | config.overrides.vaultDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template. Note: Usually not required |
+| config.s3AccessKeyId | string | `""` |  |
+| config.s3SecretAccessKey | string | `""` |  |
 | config.ssoSecretsEncryptionKey | string | `"8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="` |  |
 | config.stripeSecretKey | string | `""` |  |
 | config.vaultDomain | string | `"vault.my-company"` | The Vault domain, should be vault.company, e.g. vault.my-company |
@@ -32,13 +34,13 @@ A Helm chart for Kubernetes
 | nameOverride | string | `""` | nameOverride replaces the name of the chart in the Chart.yaml file, when this is used to construct Kubernetes object names. From [https://stackoverflow.com/questions/63838705/what-is-the-difference-between-fullnameoverride-and-nameoverride-in-helm](https://stackoverflow.com/questions/63838705/what-is-the-difference-between-fullnameoverride-and-nameoverride-in-helm) |
 | namespaceOverride | string | `""` | Override the deployment namespace. Very useful for multi-namespace deployments in combined charts |
 | nodeSelector | object | `{}` | Node Selectors in order to assign pods to certain nodes. See [https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) |
-| outfinityGift.deploymentStrategy | object | `{"type":"Recreate"}` | The strategy of the deployment for the runner. Defaults to type: Recreate as a PVC is bound to it. See `kubectl explain deployment.spec.strategy` for more and [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) |
+| outfinityGift.deploymentStrategy.type | string | `"Recreate"` |  |
 | outfinityGift.image.pullPolicy | string | `"Always"` | Image Pull Policy for the runner |
 | outfinityGift.image.repository | string | `"assistos/outfinity-gift"` | The repository of the container image for the runner <!-- # pragma: allowlist secret --> |
 | outfinityGift.image.sha | string | `"3fd47eab0604c4e73d1b2eca47503dcb4c99c3d481daae5b0e8f6e24d9c05d79"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
 | outfinityGift.image.tag | string | `"1.0.0-rc1"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
 | outfinityGift.livenessProbe | object | `{"failureThreshold":5,"httpGet":{"path":"/ready-probe","port":"http"},"initialDelaySeconds":20,"periodSeconds":20,"successThreshold":1,"timeoutSeconds":3}` | Liveness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
-| outfinityGift.podAnnotations | object | `{}` | Annotations added to the runner pod |
+| outfinityGift.podAnnotations | object | `{}` |  |
 | outfinityGift.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the runner. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
 | outfinityGift.readinessProbe | object | `{"failureThreshold":10,"httpGet":{"path":"/ready-probe","port":"http"},"initialDelaySeconds":20,"periodSeconds":20,"successThreshold":1,"timeoutSeconds":3}` | Readiness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | outfinityGift.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":false,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000}` | Security Context for the runner container See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container) |
@@ -51,6 +53,19 @@ A Helm chart for Kubernetes
 | persistence.size | string | `"100Gi"` | Size of the volume for the new PVC |
 | persistence.storageClassName | string | `""` | Name of the storage class for the new PVC. If empty or not set then storage class will not be set - which means that the default storage class will be used. |
 | resources | object | `{}` | Resource constraints for the builder and runner |
+| s3Adapter.image.pullPolicy | string | `"Always"` | Image Pull Policy for the S3 Adapter |
+| s3Adapter.image.repository | string | `"assistos/s3-adapter"` | The repository of the container image for the S3 Adapter |
+| s3Adapter.image.sha | string | `"3fd47eab0604c4e73d1b2eca47503dcb4c99c3d481daae5b0e8f6e24d9c05d79"` | sha256 digest of the image. Do not add the prefix "@sha256:" |
+| s3Adapter.image.tag | string | `"1.0.0-rc1"` | The Tag of the image for the S3 Adapter |
+| s3AdapterConfig.accessKeyId | string | `""` | The S3 Access Key ID |
+| s3AdapterConfig.backupJournalFilePath | string | `"/outfinity-gift/apihub-root/external-volume/backup/backup-journal.txt"` |  |
+| s3AdapterConfig.bucketName | string | `""` | The S3 Bucket Name |
+| s3AdapterConfig.endpoint | string | `""` | The S3 Endpoint |
+| s3AdapterConfig.port | int | `3000` |  |
+| s3AdapterConfig.region | string | `""` | The S3 Region |
+| s3AdapterConfig.secretAccessKey | string | `""` | The S3 Secret Access Key |
+| s3AdapterConfig.watchList[0] | string | `"/outfinity-gift/apihub-root/external-volume/versionlessdsu"` |  |
+| s3AdapterConfig.watchList[1] | string | `"/outfinity-gift/apihub-root/external-volume/lightDB"` |  |
 | secretProviderClass.apiVersion | string | `"secrets-store.csi.x-k8s.io/v1"` | API Version of the SecretProviderClass |
 | secretProviderClass.enabled | bool | `false` | Whether to use CSI Secrets Store (e.g. Azure Key Vault) instead of "traditional" Kubernetes Secret. NOTE: DO ENABLE, NOT TESTED YET! |
 | secretProviderClass.spec | object | `{}` | Spec for the SecretProviderClass. Note: The orgAccountJson must be mounted as objectAlias orgAccountJson |
