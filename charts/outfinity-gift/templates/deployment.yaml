@@ -36,8 +36,7 @@ spec:
             - "-c"
             - |
               mkdir -p /mnt/outfinity-gift-volume/templates && \
-              cp /outfinity-gift/apihub-root/external-volume/templates/homeContent.json /mnt/outfinity-gift-volume/templates/ && \
-              cp /outfinity-gift/apihub-root/external-volume/templates/privacy.txt /mnt/outfinity-gift-volume/templates/
+              cp -r /outfinity-gift/apihub-root/external-volume/templates/* /mnt/outfinity-gift-volume/templates/
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /mnt/outfinity-gift-volume
