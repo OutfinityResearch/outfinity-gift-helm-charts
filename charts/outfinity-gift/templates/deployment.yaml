@@ -35,8 +35,8 @@ spec:
             - "sh"
             - "-c"
             - |
-              mkdir -p /mnt/outfinity-gift-volume/templates && \
-              cp -r /outfinity-gift/apihub-root/external-volume/templates/* /mnt/outfinity-gift-volume/templates/
+              mkdir -p /mnt/outfinity-gift-volume/content-config && \
+              cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /mnt/outfinity-gift-volume
