@@ -143,7 +143,18 @@ Configuration apihub.json.
   "enableJWTAuthorisation": false,
   "enableSimpleAuth": false,
   "enableOAuth": false,
-  "enableLocalhostAuthorization": false
+  "enableLocalhostAuthorization": false,
+  "cacheDurations": [
+    {"urlPattern":"/", "duration": 3600, "method": "equals"},
+    {"urlPattern":"/outfinity-gift/getCategories", "duration": 3600},
+    {"urlPattern":"/outfinity-gift/getPrivacyPolicy", "duration": 3600},
+    {"urlPattern":"/outfinity-gift/getHomeCustomContent", "duration": 3600},
+    {"urlPattern":"/outfinity-gift/getDemoGift", "duration": 3600},
+    {"urlPattern":"/outfinity-gift/listCauses", "duration": 3600},
+    {"urlPattern":"/assets", "duration": 3600},
+    {"urlPattern":"/scripts", "duration": 3600},
+    {"urlPattern":"/style", "duration": 3600}
+  ]
 }
 {{- end }}
 
