@@ -153,6 +153,7 @@ Configuration apihub.json.
     {"urlPattern":"/outfinity-gift/listCauses", "duration": 3600},
     {"urlPattern":"/assets", "duration": 3600},
     {"urlPattern":"/scripts", "duration": 3600},
+    {"urlPattern":"/admin-wallet/bundles/", "duration": 3600},
     {"urlPattern":"/style", "duration": 3600}
   ]
 }
