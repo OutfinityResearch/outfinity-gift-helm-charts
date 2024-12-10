@@ -39,8 +39,8 @@ spec:
             - "-c"
             - |
               if [ ! -d /mnt/outfinity-gift-volume/content-config ]; then
-                mkdir -p /mnt/outfinity-gift-volume/content-config
-                cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
+                sudo mkdir -p /mnt/outfinity-gift-volume/content-config
+                sudo cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
               fi
 
       containers:
