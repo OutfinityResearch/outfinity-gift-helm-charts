@@ -37,8 +37,12 @@ spec:
             - |
               if [ ! -d "/mnt/outfinity-gift-volume/content-config" ] || [ -z "$(ls -A /mnt/outfinity-gift-volume/content-config)" ]; then
                 echo "Directory is empty, performing initial data copy..."
-                mkdir -p /mnt/outfinity-gift-volume/content-config && \
+                # First, create all necessary subdirectories
+                cd /outfinity-gift/apihub-root/external-volume/content-config && \
+                find . -type d -exec mkdir -p "/mnt/outfinity-gift-volume/content-config/{}" \; && \
+                # Then copy all files
                 cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
+                echo "Initial data copy completed successfully"
               else
                 echo "Directory already contains data, skipping copy..."
               fi
