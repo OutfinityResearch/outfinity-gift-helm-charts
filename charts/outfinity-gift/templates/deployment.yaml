@@ -35,7 +35,7 @@ spec:
             - "sh"
             - "-c"
             - |
-              if [ -z "$(ls -A /mnt/outfinity-gift-volume/content-config)" ]; then
+              if [ ! "$(ls -A /mnt/outfinity-gift-volume/content-config)" ]; then
                 echo "Directory is empty, performing initial data copy..."
                 mkdir -p /mnt/outfinity-gift-volume/content-config && \
                 cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
