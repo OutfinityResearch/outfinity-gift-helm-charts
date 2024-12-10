@@ -35,11 +35,13 @@ spec:
             - "sh"
             - "-c"
             - |
-              mkdir -p /mnt/outfinity-gift-volume/content-config && \
-              cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
-          volumeMounts:
-            - name: outfinity-gift-external-volume
-              mountPath: /mnt/outfinity-gift-volume
+              if [ -z "$(ls -A /mnt/outfinity-gift-volume/content-config)" ]; then
+                echo "Directory is empty, performing initial data copy..."
+                mkdir -p /mnt/outfinity-gift-volume/content-config && \
+                cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
+              else
+                echo "Directory already contains data, skipping copy..."
+              fi
 
       containers:
         - name: outfinity-gift
