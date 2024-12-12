@@ -8,6 +8,7 @@ config:
   vaultDomain: "vault.my-company"
   ssoSecretsEncryptionKey: "8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="
   stripeSecretKey: ""
+  sendgridApiKey: ""
   # -- Enable Dev mode
   dev: "true"
   s3AccessKeyId: ""

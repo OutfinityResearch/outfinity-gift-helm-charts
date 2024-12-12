@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.0.31](https://img.shields.io/badge/Version-1.0.31-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.0.32](https://img.shields.io/badge/Version-1.0.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -17,6 +17,7 @@ A Helm chart for Kubernetes
 | config.overrides.vaultDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template. Note: Usually not required |
 | config.s3AccessKeyId | string | `""` |  |
 | config.s3SecretAccessKey | string | `""` |  |
+| config.sendgridApiKey | string | `""` |  |
 | config.ssoSecretsEncryptionKey | string | `"8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="` |  |
 | config.stripeSecretKey | string | `""` |  |
 | config.vaultDomain | string | `"vault.my-company"` | The Vault domain, should be vault.company, e.g. vault.my-company |

@@ -93,7 +93,8 @@ Configuration env.json
   "SSO_SECRETS_ENCRYPTION_KEY": {{ required "config.ssoSecretsEncryptionKey must be set" .Values.config.ssoSecretsEncryptionKey | quote}},
   "BDNS_ROOT_HOSTS": "http://127.0.0.1:8080",
   "OPENDSU_ENABLE_DEBUG": {{ required "config.dev must be set" .Values.config.dev | quote}},
-  "STRIPE_SECRET_KEY": {{ required "config.stripeSecretKey must be set" .Values.config.stripeSecretKey | quote}}
+  "STRIPE_SECRET_KEY": {{ required "config.stripeSecretKey must be set" .Values.config.stripeSecretKey | quote}},
+  "SENDGRID_API_KEY": {{ required "config.sendgridApiKey must be set" .Values.config.sendgridApiKey | quote}}
 }
 {{- end }}
 
