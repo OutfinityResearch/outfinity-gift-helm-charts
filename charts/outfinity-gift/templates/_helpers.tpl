@@ -130,7 +130,8 @@ Configuration apihub.json.
     },
     "staticServer": {
       "excludedFiles": [
-        ".*.secret"
+        ".*.secret",
+        ".*content.pdf"
       ]
     },
     "bricking": {},
