@@ -5,3 +5,5 @@ Create Configmaps from templates
 {{- include "outfinity-gift.configmap-bdns" (list $ . "" (dict)) }}
 ---
 {{- include "outfinity-gift.configmap-domains" (list $ . "" (dict)) }}
+---
+{{- include "outfinity-gift.configmap-publickey" (list $ . "" (dict)) }}
