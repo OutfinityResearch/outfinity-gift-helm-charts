@@ -65,6 +65,10 @@ spec:
           readinessProbe:
             {{- toYaml .Values.outfinityGift.readinessProbe | nindent 12 }}
           volumeMounts:
+            - name: outfinity-gift-publickey-volume
+              mountPath: /outfinity-gift/apihub-root/external-volume/config/publicKey.txt
+              subPath: publicKey.txt
+              readOnly: true
             - name: outfinity-gift-external-volume
               mountPath: /outfinity-gift/apihub-root/external-volume
             - name: outfinity-gift-secret-volume
@@ -99,6 +103,9 @@ spec:
               readOnly: true
 
       volumes:
+        - name: outfinity-gift-publickey-volume
+          configMap:
+            name: {{ include "outfinity-gift.fullname" . }}-publickey
         - name: outfinity-gift-secret-volume
           secret:
             secretName: {{ include "outfinity-gift.fullname" . }}
