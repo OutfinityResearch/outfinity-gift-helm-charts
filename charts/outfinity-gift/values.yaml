@@ -170,7 +170,7 @@ pdfConverter:
 
   livenessProbe:
     httpGet:
-      path: /
+      path: /ready
       port: http
     initialDelaySeconds: 20
     periodSeconds: 20
@@ -180,7 +180,7 @@ pdfConverter:
 
   readinessProbe:
     httpGet:
-      path: /
+      path: /ready
       port: http
     initialDelaySeconds: 20
     periodSeconds: 20
