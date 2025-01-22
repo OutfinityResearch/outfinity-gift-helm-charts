@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "outfinity-gift.fullname" . }}-pdf-converter
+  name: pdf-converter
   namespace: {{ template "outfinity-gift.namespace" . }}
   labels:
     {{- include "outfinity-gift.labels" . | nindent 4 }}

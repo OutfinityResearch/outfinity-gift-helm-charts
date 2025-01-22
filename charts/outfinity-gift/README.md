@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -15,6 +15,7 @@ A Helm chart for Kubernetes
 | config.overrides.bdnsHosts | string | `""` | Centrally managed and provided BDNS Hosts Config. You must set this value in a non-sandbox environment! See [templates/_configmap-bdns.tpl](templates/_configmap-bdns.tpl) for default value. |
 | config.overrides.envJson | string | `""` | Option to explitly override the env.json for APIHub instead of using the predefined template. Note 1: Usually not required to override. Note 2: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. |
 | config.overrides.vaultDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template. Note: Usually not required |
+| config.pdfToHtmlConverterUrl | string | `"http://pdf-converter:3001"` |  |
 | config.s3AccessKeyId | string | `""` |  |
 | config.s3SecretAccessKey | string | `""` |  |
 | config.sendgridApiKey | string | `""` |  |
