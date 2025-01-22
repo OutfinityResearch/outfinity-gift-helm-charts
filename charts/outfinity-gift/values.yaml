@@ -153,6 +153,80 @@ s3Adapter:
     # Do not add the prefix "@sha256:"
     sha: "3fd47eab0604c4e73d1b2eca47503dcb4c99c3d481daae5b0e8f6e24d9c05d79"
 
+# Add this section to your values.yaml at the root level (same level as 'config:', 'outfinityGift:', etc.)
+
+pdfConverter:
+  enabled: false  # Set to true to enable the PDF converter
+  image:
+    repository: your-registry/pdf-converter
+    pullPolicy: Always
+    tag: "latest"
+
+  podAnnotations: {}
+
+  deploymentStrategy:
+    type: Recreate
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 20
+    periodSeconds: 20
+    timeoutSeconds: 3
+    successThreshold: 1
+    failureThreshold: 5
+
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 20
+    periodSeconds: 20
+    timeoutSeconds: 3
+    successThreshold: 1
+    failureThreshold: 10
+
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+
+  securityContext:
+    privileged: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+
+  persistence:
+    enabled: true
+    existingClaim: ""
+    storageClassName: ""
+    size: "10Gi"
+    accessModes:
+      - ReadWriteOnce
+    selectorLabels: {}
+    finalizers:
+      - kubernetes.io/pvc-protection
+
+  service:
+    type: ClusterIP
+    port: 3001
+    targetPort: 3001
+
 # Settings for Containers with kubectl installed used by Jobs "pre-builder", "pre-upgrade-volumesnapshot", "final-volumesnapshot" and "cleanup"
 kubectl:
   # -- Time to keep the Job after finished in case of an error. If no error occured the Jobs will immediately by deleted.

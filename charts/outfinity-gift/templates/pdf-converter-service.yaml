@@ -1,0 +1,20 @@
+{{- if .Values.pdfConverter.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "outfinity-gift.fullname" . }}-pdf-converter
+  namespace: {{ template "outfinity-gift.namespace" . }}
+  labels:
+    {{- include "outfinity-gift.labels" . | nindent 4 }}
+    app.kubernetes.io/component: pdf-converter
+spec:
+  type: {{ .Values.pdfConverter.service.type }}
+  ports:
+    - port: {{ .Values.pdfConverter.service.port }}
+      targetPort: {{ .Values.pdfConverter.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "outfinity-gift.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: pdf-converter
+{{- end }}

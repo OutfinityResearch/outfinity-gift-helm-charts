@@ -1,0 +1,30 @@
+{{- if and .Values.pdfConverter.enabled .Values.pdfConverter.persistence.enabled (not .Values.pdfConverter.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "outfinity-gift.fullname" . }}-pdf-converter
+  namespace: {{ template "outfinity-gift.namespace" . }}
+  labels:
+    {{- include "outfinity-gift.labels" . | nindent 4 }}
+    app.kubernetes.io/component: pdf-converter
+  {{- with .Values.pdfConverter.persistence.finalizers }}
+  finalizers:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.pdfConverter.persistence.storageClassName }}
+  storageClassName: {{ .Values.pdfConverter.persistence.storageClassName }}
+  {{- end }}
+  accessModes:
+    {{- range .Values.pdfConverter.persistence.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.pdfConverter.persistence.size | quote }}
+  {{- with .Values.pdfConverter.persistence.selectorLabels }}
+  selector:
+    matchLabels:
+      {{- toYaml . | nindent 6 }}
+  {{- end }}
+{{- end }}
