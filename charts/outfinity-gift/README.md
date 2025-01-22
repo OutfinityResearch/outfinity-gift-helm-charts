@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -47,7 +47,7 @@ A Helm chart for Kubernetes
 | outfinityGift.readinessProbe | object | `{"failureThreshold":10,"httpGet":{"path":"/ready-probe","port":"http"},"initialDelaySeconds":20,"periodSeconds":20,"successThreshold":1,"timeoutSeconds":3}` | Readiness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | outfinityGift.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":false,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000}` | Security Context for the runner container See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container) |
 | pdfConverter.deploymentStrategy.type | string | `"Recreate"` |  |
-| pdfConverter.enabled | bool | `false` |  |
+| pdfConverter.enabled | bool | `true` |  |
 | pdfConverter.image.pullPolicy | string | `"Always"` |  |
 | pdfConverter.image.repository | string | `"assistos/pdftohtmlconverter"` |  |
 | pdfConverter.image.sha | string | `"5fc10a509c8535048761a05cf5a430361d84e7cd0072f30961675e98f92217e9"` |  |
