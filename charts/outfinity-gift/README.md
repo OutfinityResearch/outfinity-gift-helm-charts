@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.5](https://img.shields.io/badge/Version-1.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -53,7 +53,7 @@ A Helm chart for Kubernetes
 | pdfConverter.image.repository | string | `"assistos/pdftohtmlconverter"` |  |
 | pdfConverter.image.sha | string | `"5fc10a509c8535048761a05cf5a430361d84e7cd0072f30961675e98f92217e9"` |  |
 | pdfConverter.image.tag | string | `"1.0.0-rc1"` |  |
-| pdfConverter.livenessProbe.failureThreshold | int | `5` |  |
+| pdfConverter.livenessProbe.failureThreshold | int | `10` |  |
 | pdfConverter.livenessProbe.httpGet.path | string | `"/ready"` |  |
 | pdfConverter.livenessProbe.httpGet.port | string | `"http"` |  |
 | pdfConverter.livenessProbe.initialDelaySeconds | int | `20` |  |
