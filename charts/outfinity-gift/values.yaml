@@ -158,9 +158,10 @@ s3Adapter:
 pdfConverter:
   enabled: false  # Set to true to enable the PDF converter
   image:
-    repository: your-registry/pdf-converter
+    repository: assistos/pdftohtmlconverter
     pullPolicy: Always
-    tag: "latest"
+    tag: "1.0.0-rc1"
+    sha: "5fc10a509c8535048761a05cf5a430361d84e7cd0072f30961675e98f92217e9"
 
   podAnnotations: {}
 

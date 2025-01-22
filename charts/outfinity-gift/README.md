@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -49,8 +49,9 @@ A Helm chart for Kubernetes
 | pdfConverter.deploymentStrategy.type | string | `"Recreate"` |  |
 | pdfConverter.enabled | bool | `false` |  |
 | pdfConverter.image.pullPolicy | string | `"Always"` |  |
-| pdfConverter.image.repository | string | `"your-registry/pdf-converter"` |  |
-| pdfConverter.image.tag | string | `"latest"` |  |
+| pdfConverter.image.repository | string | `"assistos/pdftohtmlconverter"` |  |
+| pdfConverter.image.sha | string | `"5fc10a509c8535048761a05cf5a430361d84e7cd0072f30961675e98f92217e9"` |  |
+| pdfConverter.image.tag | string | `"1.0.0-rc1"` |  |
 | pdfConverter.livenessProbe.failureThreshold | int | `5` |  |
 | pdfConverter.livenessProbe.httpGet.path | string | `"/"` |  |
 | pdfConverter.livenessProbe.httpGet.port | string | `"http"` |  |
