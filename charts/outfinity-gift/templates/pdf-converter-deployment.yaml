@@ -55,7 +55,7 @@ spec:
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
-            claimName: {{ include "outfinity-gift.fullname" . }}-pdf-converter
+            claimName: pdf-converter
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -68,6 +68,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-{{- else }}
-# Debug: .Values.pdfConverter is {{ .Values.pdfConverter | quote }}
 {{- end }}
