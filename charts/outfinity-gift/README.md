@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.7](https://img.shields.io/badge/Version-1.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.8](https://img.shields.io/badge/Version-1.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -47,51 +47,6 @@ A Helm chart for Kubernetes
 | outfinityGift.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the runner. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
 | outfinityGift.readinessProbe | object | `{"failureThreshold":10,"httpGet":{"path":"/ready-probe","port":"http"},"initialDelaySeconds":20,"periodSeconds":20,"successThreshold":1,"timeoutSeconds":3}` | Readiness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | outfinityGift.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":false,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000}` | Security Context for the runner container See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container) |
-| pdfConverter.deploymentStrategy.type | string | `"Recreate"` |  |
-| pdfConverter.enabled | bool | `true` |  |
-| pdfConverter.image.pullPolicy | string | `"Always"` |  |
-| pdfConverter.image.repository | string | `"assistos/pdftohtmlconverter"` |  |
-| pdfConverter.image.sha | string | `"5fc10a509c8535048761a05cf5a430361d84e7cd0072f30961675e98f92217e9"` |  |
-| pdfConverter.image.tag | string | `"1.0.0-rc1"` |  |
-| pdfConverter.livenessProbe.failureThreshold | int | `10` |  |
-| pdfConverter.livenessProbe.httpGet.path | string | `"/ready"` |  |
-| pdfConverter.livenessProbe.httpGet.port | string | `"http"` |  |
-| pdfConverter.livenessProbe.initialDelaySeconds | int | `20` |  |
-| pdfConverter.livenessProbe.periodSeconds | int | `20` |  |
-| pdfConverter.livenessProbe.successThreshold | int | `1` |  |
-| pdfConverter.livenessProbe.timeoutSeconds | int | `3` |  |
-| pdfConverter.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
-| pdfConverter.persistence.enabled | bool | `true` |  |
-| pdfConverter.persistence.existingClaim | string | `""` |  |
-| pdfConverter.persistence.finalizers[0] | string | `"kubernetes.io/pvc-protection"` |  |
-| pdfConverter.persistence.selectorLabels | object | `{}` |  |
-| pdfConverter.persistence.size | string | `"10Gi"` |  |
-| pdfConverter.persistence.storageClassName | string | `""` |  |
-| pdfConverter.podAnnotations | object | `{}` |  |
-| pdfConverter.podSecurityContext.fsGroup | int | `1000` |  |
-| pdfConverter.podSecurityContext.runAsGroup | int | `1000` |  |
-| pdfConverter.podSecurityContext.runAsUser | int | `1000` |  |
-| pdfConverter.readinessProbe.failureThreshold | int | `10` |  |
-| pdfConverter.readinessProbe.httpGet.path | string | `"/ready"` |  |
-| pdfConverter.readinessProbe.httpGet.port | string | `"http"` |  |
-| pdfConverter.readinessProbe.initialDelaySeconds | int | `20` |  |
-| pdfConverter.readinessProbe.periodSeconds | int | `20` |  |
-| pdfConverter.readinessProbe.successThreshold | int | `1` |  |
-| pdfConverter.readinessProbe.timeoutSeconds | int | `3` |  |
-| pdfConverter.resources.limits.cpu | string | `"500m"` |  |
-| pdfConverter.resources.limits.memory | string | `"512Mi"` |  |
-| pdfConverter.resources.requests.cpu | string | `"200m"` |  |
-| pdfConverter.resources.requests.memory | string | `"256Mi"` |  |
-| pdfConverter.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| pdfConverter.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| pdfConverter.securityContext.privileged | bool | `false` |  |
-| pdfConverter.securityContext.readOnlyRootFilesystem | bool | `false` |  |
-| pdfConverter.securityContext.runAsGroup | int | `1000` |  |
-| pdfConverter.securityContext.runAsNonRoot | bool | `true` |  |
-| pdfConverter.securityContext.runAsUser | int | `1000` |  |
-| pdfConverter.service.port | int | `3001` |  |
-| pdfConverter.service.targetPort | int | `3001` |  |
-| pdfConverter.service.type | string | `"ClusterIP"` |  |
 | persistence.accessModes | list | `["ReadWriteOnce"]` | AccessModes for the new PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
 | persistence.dataSource | object | `{}` | DataSource option for cloning an existing volume or creating from a snapshot for a new PVC. See [values.yaml](values.yaml) for more details. |
 | persistence.deleteOnUninstall | bool | `true` | Boolean flag whether to delete the (new) PVC on uninstall or not. |
