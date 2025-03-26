@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.10](https://img.shields.io/badge/Version-1.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.11](https://img.shields.io/badge/Version-1.1.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -21,6 +21,7 @@ A Helm chart for Kubernetes
 | config.s3AccessKeyId | string | `""` |  |
 | config.s3SecretAccessKey | string | `""` |  |
 | config.sendgridApiKey | string | `""` |  |
+| config.sendgridSenderEmail | string | `""` |  |
 | config.serverlessId | string | `"outfinity-gift"` |  |
 | config.serverlessStorage | string | `"../apihub-root/external-volume/serverlessApi"` |  |
 | config.ssoSecretsEncryptionKey | string | `"8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="` |  |

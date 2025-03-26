@@ -95,6 +95,7 @@ Configuration env.json
   "OPENDSU_ENABLE_DEBUG": {{ required "config.dev must be set" .Values.config.dev | quote}},
   "STRIPE_SECRET_KEY": {{ required "config.stripeSecretKey must be set" .Values.config.stripeSecretKey | quote}},
   "SENDGRID_API_KEY": {{ required "config.sendgridApiKey must be set" .Values.config.sendgridApiKey | quote}},
+  "SENDGRID_SENDER_EMAIL": {{ required "config.sendgridSenderEmail must be set" .Values.config.sendgridSenderEmail | quote}},
   "PDF_TO_HTML_CONVERTER_URL": {{ required "config.pdfToHtmlConverterUrl must be set" .Values.config.pdfToHtmlConverterUrl | quote}},
   "AUTH_API_PREFIX": {{ required "config.authApiPrefix must be set" .Values.config.authApiPrefix | quote}},
   "SERVERLESS_ID": {{ required "config.serverlessId must be set" .Values.config.serverlessId | quote}},
