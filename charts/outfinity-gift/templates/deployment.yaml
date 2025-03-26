@@ -35,17 +35,26 @@ spec:
             - "sh"
             - "-c"
             - |
-              if [ ! -d "/mnt/outfinity-gift-volume/content-config" ] || [ -z "$(ls -A /mnt/outfinity-gift-volume/content-config)" ]; then
-                echo "Directory is empty, performing initial data copy..."
-                # First, create all necessary subdirectories
-                cd /outfinity-gift/apihub-root/external-volume/content-config && \
-                find . -type d -exec mkdir -p "/mnt/outfinity-gift-volume/content-config/{}" \; && \
-                # Then copy all files
-                cp -r /outfinity-gift/apihub-root/external-volume/content-config/* /mnt/outfinity-gift-volume/content-config/
-                echo "Initial data copy completed successfully"
-              else
-                echo "Directory already contains data, skipping copy..."
-              fi
+              # Function to copy directory if empty
+              copy_if_empty() {
+                local src=$1
+                local dest=$2
+                if [ ! -d "$dest" ] || [ -z "$(ls -A $dest)" ]; then
+                  echo "Directory $dest is empty, performing initial data copy..."
+                  cd "$src" && \
+                  find . -type d -exec mkdir -p "$dest/{}" \; && \
+                  cp -r * "$dest/"
+                  echo "Initial data copy completed successfully for $dest"
+                else
+                  echo "Directory $dest already contains data, skipping copy..."
+                fi
+              }
+
+              # Copy content-config if needed
+              copy_if_empty "/outfinity-gift/apihub-root/external-volume/content-config" "/mnt/outfinity-gift-volume/content-config"
+              
+              # Copy serverlessApi if needed
+              copy_if_empty "/outfinity-gift/apihub-root/external-volume/serverlessApi" "/mnt/outfinity-gift-volume/serverlessApi"
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /mnt/outfinity-gift-volume
