@@ -95,7 +95,11 @@ Configuration env.json
   "OPENDSU_ENABLE_DEBUG": {{ required "config.dev must be set" .Values.config.dev | quote}},
   "STRIPE_SECRET_KEY": {{ required "config.stripeSecretKey must be set" .Values.config.stripeSecretKey | quote}},
   "SENDGRID_API_KEY": {{ required "config.sendgridApiKey must be set" .Values.config.sendgridApiKey | quote}},
-  "PDF_TO_HTML_CONVERTER_URL": {{ required "config.pdfToHtmlConverterUrl must be set" .Values.config.pdfToHtmlConverterUrl | quote}}
+  "PDF_TO_HTML_CONVERTER_URL": {{ required "config.pdfToHtmlConverterUrl must be set" .Values.config.pdfToHtmlConverterUrl | quote}},
+  "AUTH_API_PREFIX": {{ required "config.authApiPrefix must be set" .Values.config.authApiPrefix | quote}},
+  "SERVERLESS_ID": {{ required "config.serverlessId must be set" .Values.config.serverlessId | quote}},
+  "SERVERLESS_STORAGE": {{ required "config.serverlessStorage must be set" .Values.config.serverlessStorage | quote}},
+  "LOGS_FOLDER": {{ required "config.logsFolder must be set" .Values.config.logsFolder | quote}}
 }
 {{- end }}
 
@@ -106,11 +110,14 @@ Configuration apihub.json.
 {
   "storage": "../apihub-root",
   "port": 8080,
+  "workers": 1,
   "preventRateLimit": true,
   "activeComponents": [
     "bdns",
     "bricking",
     "anchoring",
+    "proxy",
+    "Gatekeeper",
     "outfinity-gift-api",
     "versionlessDSU",
     "secrets",
@@ -129,10 +136,13 @@ Configuration apihub.json.
     "versionlessDSU": {
       "module": "./components/versionlessDSU"
     },
+    "Gatekeeper": {
+      "module": "./../../Gatekeeper"
+    },
     "staticServer": {
       "excludedFiles": [
         ".*.secret",
-        ".*content.pdf"
+        ".*private"
       ]
     },
     "bricking": {},

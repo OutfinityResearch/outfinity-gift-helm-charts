@@ -15,6 +15,10 @@ config:
   s3AccessKeyId: ""
   s3SecretAccessKey: ""
   pdfToHtmlConverterUrl: "http://pdf-converter:3001"
+  authApiPrefix:  "/outfinity_gift_auth"
+  serverlessId: "outfinity-gift"
+  serverlessStorage: "../apihub-root/external-volume/serverlessApi"
+  logsFolder: "../apihub-root/external-volume/outfinity_gift_logs"
   # -- The outfinity-gift version
   overrides:
     # -- Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template.
