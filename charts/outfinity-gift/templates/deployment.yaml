@@ -35,11 +35,11 @@ spec:
             - "sh"
             - "-c"
             - |
-              # Function to copy files and directories if they don't exist
-              copy_if_not_exists() {
+              # Function to copy all files and directories, overwriting existing ones
+              copy_with_overwrite() {
                 local src=$1
                 local dest=$2
-                echo "Checking and copying files from $src to $dest..."
+                echo "Copying all files from $src to $dest (with overwrite)..."
                 
                 # Create destination directory if it doesn't exist
                 mkdir -p "$dest"
@@ -56,24 +56,19 @@ spec:
                   rel_path="${item#./}"
                   dest_path="$dest/$rel_path"
                   
-                  # Check if destination path exists
-                  if [ ! -e "$dest_path" ]; then
-                    if [ -d "$item" ]; then
-                      echo "Creating directory: $dest_path"
-                      mkdir -p "$dest_path"
-                    else
-                      echo "Copying file: $rel_path"
-                      cp -p "$item" "$dest_path"
-                    fi
-                  else
-                    echo "Skipping existing: $rel_path"
+                  if [ -d "$item" ]; then
+                    echo "Creating directory: $dest_path"
+                    mkdir -p "$dest_path"
+                  elif [ -f "$item" ]; then
+                    echo "Copying file: $rel_path (overwriting if exists)"
+                    cp -f "$item" "$dest_path"
                   fi
                 done
                 echo "Copy operation completed for $dest"
               }
 
-              # Copy all content from external-volume
-              copy_if_not_exists "/outfinity-gift/apihub-root/external-volume" "/mnt/outfinity-gift-volume"
+              # Copy all content from external-volume with overwrite
+              copy_with_overwrite "/outfinity-gift/apihub-root/external-volume" "/mnt/outfinity-gift-volume"
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /mnt/outfinity-gift-volume
