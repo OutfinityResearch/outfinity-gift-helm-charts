@@ -35,26 +35,45 @@ spec:
             - "sh"
             - "-c"
             - |
-              # Function to copy directory if empty
-              copy_if_empty() {
+              # Function to copy files and directories if they don't exist
+              copy_if_not_exists() {
                 local src=$1
                 local dest=$2
-                if [ ! -d "$dest" ] || [ -z "$(ls -A $dest)" ]; then
-                  echo "Directory $dest is empty, performing initial data copy..."
-                  cd "$src" && \
-                  find . -type d -exec mkdir -p "$dest/{}" \; && \
-                  cp -r * "$dest/"
-                  echo "Initial data copy completed successfully for $dest"
-                else
-                  echo "Directory $dest already contains data, skipping copy..."
-                fi
+                echo "Checking and copying files from $src to $dest..."
+                
+                # Create destination directory if it doesn't exist
+                mkdir -p "$dest"
+                
+                # Find all files and directories in source
+                cd "$src"
+                find . -type f -o -type d | while read -r item; do
+                  # Skip the root directory itself
+                  if [ "$item" = "." ]; then
+                    continue
+                  fi
+                  
+                  # Get the relative path
+                  rel_path="${item#./}"
+                  dest_path="$dest/$rel_path"
+                  
+                  # Check if destination path exists
+                  if [ ! -e "$dest_path" ]; then
+                    if [ -d "$item" ]; then
+                      echo "Creating directory: $dest_path"
+                      mkdir -p "$dest_path"
+                    else
+                      echo "Copying file: $rel_path"
+                      cp -p "$item" "$dest_path"
+                    fi
+                  else
+                    echo "Skipping existing: $rel_path"
+                  fi
+                done
+                echo "Copy operation completed for $dest"
               }
 
-              # Copy content-config if needed
-              copy_if_empty "/outfinity-gift/apihub-root/external-volume/content-config" "/mnt/outfinity-gift-volume/content-config"
-              
-              # Copy serverlessApi if needed
-              copy_if_empty "/outfinity-gift/apihub-root/external-volume/serverlessApi" "/mnt/outfinity-gift-volume/serverlessApi"
+              # Copy all content from external-volume
+              copy_if_not_exists "/outfinity-gift/apihub-root/external-volume" "/mnt/outfinity-gift-volume"
           volumeMounts:
             - name: outfinity-gift-external-volume
               mountPath: /mnt/outfinity-gift-volume
