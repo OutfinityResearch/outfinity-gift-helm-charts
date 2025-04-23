@@ -19,7 +19,10 @@ config:
   serverlessId: "outfinity-gift"
   serverlessStorage: "../apihub-root/external-volume/serverlessApi"
   logsFolder: "../apihub-root/external-volume/outfinity_gift_logs"
+  auditFolder: "../apihub-root/external-volume/outfinity_gift_audit"
   sendgridSenderEmail: ""
+  rpId: ""
+  origin: ""
   # -- The outfinity-gift version
   overrides:
     # -- Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template.
