@@ -103,7 +103,8 @@ Configuration env.json
   "LOGS_FOLDER": {{ required "config.logsFolder must be set" .Values.config.logsFolder | quote}},
   "AUDIT_FOLDER": {{ required "config.auditFolder must be set" .Values.config.auditFolder | quote}},
   "RP_ID": {{ required "config.rpId must be set" .Values.config.rpId | quote}},
-  "ORIGIN": {{ required "config.origin must be set" .Values.config.origin | quote}}
+  "ORIGIN": {{ required "config.origin must be set" .Values.config.origin | quote}},
+  "APP_NAME": {{ required "config.appName must be set" .Values.config.appName | quote}}
 }
 {{- end }}
 
