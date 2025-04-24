@@ -24,6 +24,7 @@ config:
   rpId: ""
   origin: ""
   appName: "outfinity-gift"
+  sysadminEmail: ""
   # -- The outfinity-gift version
   overrides:
     # -- Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template.
