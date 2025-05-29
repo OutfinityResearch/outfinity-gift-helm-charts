@@ -3,6 +3,16 @@ entries:
   outfinity-gift:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-05-29T09:46:15.151807172Z"
+    description: A Helm chart for Kubernetes
+    digest: 3fd2c0190f32c01f9bacd45186158970478949ae99d24b1d79d237346e870049
+    name: outfinity-gift
+    type: application
+    urls:
+    - https://github.com/OutfinityResearch/outfinity-gift-helm-charts/releases/download/outfinity-gift-1.1.18/outfinity-gift-1.1.18.tgz
+    version: 1.1.18
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-05-08T06:36:30.559357631Z"
     description: A Helm chart for Kubernetes
     digest: 569df2ba55ea143d0f158fe530f8b5063552bc00a987efdaf85e1db8e76eda8f
@@ -531,4 +541,4 @@ entries:
     urls:
     - https://github.com/OutfinityResearch/outfnity-gift-helm-charts/releases/download/outfinity-gift-1.0.1/outfinity-gift-1.0.1.tgz
     version: 1.0.1
-generated: "2025-05-08T06:36:30.559775901Z"
+generated: "2025-05-29T09:46:15.152196335Z"
