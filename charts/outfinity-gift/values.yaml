@@ -6,7 +6,7 @@
 config:
   # -- The Vault domain, should be vault.company, e.g. vault.my-company
   vaultDomain: "vault.my-company"
-  ssoSecretsEncryptionKey: "8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="
+  ssoSecretsEncryptionKey: ""
   stripeSecretKey: ""
   sendgridApiKey: ""
   stripePublicKey: ""
@@ -25,6 +25,10 @@ config:
   origin: ""
   appName: "outfinity-gift"
   sysadminEmail: ""
+  systemMintAmount: 1000000000
+  founderPercentage: 10
+  ipWhitelist: "127.0.0.1"
+  nodeEnv: "development"
   # -- The outfinity-gift version
   overrides:
     # -- Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template.

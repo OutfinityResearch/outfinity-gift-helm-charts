@@ -105,7 +105,11 @@ Configuration env.json
   "RP_ID": {{ required "config.rpId must be set" .Values.config.rpId | quote}},
   "ORIGIN": {{ required "config.origin must be set" .Values.config.origin | quote}},
   "APP_NAME": {{ required "config.appName must be set" .Values.config.appName | quote}},
-  "SYSADMIN_EMAIL": {{ required "config.sysadminEmail must be set" .Values.config.sysadminEmail | quote}}
+  "SYSADMIN_EMAIL": {{ required "config.sysadminEmail must be set" .Values.config.sysadminEmail | quote}},
+  "SYSTEM_MINT_AMOUNT": {{ required "config.systemMintAmount must be set" .Values.config.systemMintAmount | quote}},
+  "FOUNDER_PERCENTAGE": {{ required "config.founderPercentage must be set" .Values.config.founderPercentage | quote}},
+  "IP_WHITELIST": {{ required "config.ipWhitelist must be set" .Values.config.ipWhitelist | quote}},
+  "NODE_ENV": {{ required "config.nodeEnv must be set" .Values.config.nodeEnv | quote}}
 }
 {{- end }}
 

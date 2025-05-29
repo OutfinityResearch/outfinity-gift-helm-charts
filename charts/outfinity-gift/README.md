@@ -1,6 +1,6 @@
 # outfinity-gift
 
-![Version: 1.1.17](https://img.shields.io/badge/Version-1.1.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.18](https://img.shields.io/badge/Version-1.1.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -13,7 +13,10 @@ A Helm chart for Kubernetes
 | config.auditFolder | string | `"../apihub-root/external-volume/outfinity_gift_audit"` |  |
 | config.authApiPrefix | string | `"/outfinity_gift_auth"` |  |
 | config.dev | string | `"true"` | Enable Dev mode |
+| config.founderPercentage | int | `10` |  |
+| config.ipWhitelist | string | `"127.0.0.1"` |  |
 | config.logsFolder | string | `"../apihub-root/external-volume/outfinity_gift_logs"` |  |
+| config.nodeEnv | string | `"development"` |  |
 | config.origin | string | `""` |  |
 | config.overrides | object | `{"apihubJson":"","bdnsHosts":"","envJson":"","vaultDomainConfigJson":""}` | The outfinity-gift version |
 | config.overrides.apihubJson | string | `""` | Option to explitly set the apihub.json instead of using the default from [https://github.com/pharmaledgerassoc/outfinity-gift/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/pharmaledgerassoc/outfinity-gift/blob/v1.3.1/apihub-root/external-volume/config/apihub.json). Note: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. <br/>outfinity-gift-86d4f7878-jrbfw Settings: [https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3](https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3) <br/> For SSO (not enabled by default): <br/> 1. "enableOAuth": true <br/> 2. "serverAuthentication": true <br/> 3. For SSO via OAuth with Azure AD, replace <TODO_*> with appropriate values.    For other identity providers (IdP) (e.g. Google, Ping, 0Auth), refer to documentation.    "redirectPath" must match the redirect URL configured at IdP <br/> 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/" |
@@ -28,10 +31,11 @@ A Helm chart for Kubernetes
 | config.sendgridSenderEmail | string | `""` |  |
 | config.serverlessId | string | `"outfinity-gift"` |  |
 | config.serverlessStorage | string | `"../apihub-root/external-volume/serverlessApi"` |  |
-| config.ssoSecretsEncryptionKey | string | `"8d0BO3SUi1hLkuxYiw1Oo8fPRCSN/r0RknDXAYnhKro="` |  |
+| config.ssoSecretsEncryptionKey | string | `""` |  |
 | config.stripePublicKey | string | `""` |  |
 | config.stripeSecretKey | string | `""` |  |
 | config.sysadminEmail | string | `""` |  |
+| config.systemMintAmount | int | `1000000000` |  |
 | config.vaultDomain | string | `"vault.my-company"` | The Vault domain, should be vault.company, e.g. vault.my-company |
 | extraResources | string | `nil` | An array of extra resources that will be deployed. This is useful e.g. for custom resources like SnapshotSchedule provided by [https://github.com/backube/snapscheduler](https://github.com/backube/snapscheduler). |
 | fullnameOverride | string | `""` | fullnameOverride completely replaces the generated name. From [https://stackoverflow.com/questions/63838705/what-is-the-difference-between-fullnameoverride-and-nameoverride-in-helm](https://stackoverflow.com/questions/63838705/what-is-the-difference-between-fullnameoverride-and-nameoverride-in-helm) |
